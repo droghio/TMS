@@ -1,0 +1,14 @@
+#! /usr/bin/python
+
+import urllib2
+import sys
+
+if len(sys.argv) == 2:
+    try:
+        f = urllib2.urlopen("http://128.113.192.63/scripts/" + sys.argv[1])
+        print f.read()
+    except:
+        print "File not found."
+
+else:
+    print "Please include filename."

@@ -1,0 +1,4 @@
+print("Time")
+sleep(2)
+turtle.down()
+return os.run({}, "get directive", "")

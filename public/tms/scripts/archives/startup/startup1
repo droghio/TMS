@@ -1,0 +1,27 @@
+local file = fs.open("/disk/progress", "r")
+local slice = file.readAll()
+file.close()
+
+slice = slice + 1
+print("Read progress file, my build num is: "..slice)
+
+local webfile = http.get("http://jldapps.com/scripts/tower/scanLine"..slice)
+local webdata = webfile.readAll()
+
+print("Loaded build file, writing to disk.")
+--local data = textutils.unserialize(webdata)
+
+local file = fs.open("/disk/progress", "w")
+file.write(slice)
+file.close()
+
+local buildfile = fs.open("scanLine"..slice, "w")
+buildfile.write(webdata)
+
+--turtle.turnLeft()
+--turtle.turnLeft()
+
+print("Wrote file tower.slc as needed.")
+shell.run("cp /disk/printer /startup")
+sleep(5)
+shell.run("reboot")

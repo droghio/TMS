@@ -1,0 +1,10 @@
+local directions = fs.open(..., "r")
+
+direction = directions.readLine()
+while (direction) do
+  os.run({}, "move", direction);
+  direction = directions.readLine()
+  if (~turtle.placeDown()) then
+    function reportError("block in the way")
+  fi
+end

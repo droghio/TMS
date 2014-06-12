@@ -1,0 +1,19 @@
+if ... == nil then
+  print("Please include a file.")
+else
+
+  filepath =  ...
+  filename = filepath:reverse()
+  filename = filename:sub(0, filename:find("/"))
+  filename = filename:reverse()
+
+  inputfile = fs.open(filepath, "r")
+  local out = http.post("http://machoke-54.dynamic.rpi.edu/loadFile.php", "name=" .. filename .. "&data=".. string.gsub(string.gsub(inputfile.readAll(), "&", "==AMP=="), "+", "==PLUS=="))
+ 
+  if string.find(out.readAll(), "Success") then
+      print "Success";
+  end
+   
+  inputfile.close()
+  out.close()
+end

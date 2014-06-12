@@ -1,0 +1,13 @@
+turtle.up()
+
+while turtle.forward()
+  turtle.digUp()
+  turtle.digDown()
+  turtle.placeUp()
+  turtle.placeDown()
+end
+
+while turtle.back() do
+end
+
+turtle.down()

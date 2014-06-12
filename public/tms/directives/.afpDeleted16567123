@@ -1,0 +1,8 @@
+print("Time")
+turtle.dig()
+turtle.turnRight()
+--turtle.back()
+--turtle.turnLeft()
+turtle.forward()
+--sleep(2)
+return os.run({}, "dance", "")

@@ -1,0 +1,10 @@
+local note = peripheral.wrap("right")
+local i = 0
+while true do
+  note.playNote(0,i)
+  i = i * i % 4
+  if i > 24 then
+    i = 15   i % 4
+  end
+  sleep(.1)
+end

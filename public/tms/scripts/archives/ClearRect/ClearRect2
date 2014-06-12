@@ -1,0 +1,37 @@
+maxx = 10
+currentx = 0
+
+dir = 0
+
+while currents < 10 do
+	while currenty < 10 do
+		--Move in X dir.
+		while (currents < maxx) do
+			currentx = currentx + 1
+			turtle.dig()
+			turtle.forward()
+		end
+
+		--Move in Y dir.
+		if (dir) then
+			turtle.turnLeft()
+			turtle.dig()
+			turtle.forward()
+			turtle.turnLeft()
+
+		else
+			turtle.turnRight()
+			turtle.dig()
+			turtle.forward()
+			turtle.turnRight()	
+		end
+
+		dir = (dir+1)%2
+		currenty = currenty + 1
+	end
+	turtle.digUp()
+	turtle.up()
+	turtle.turnLeft()
+	turtle.turnLeft()
+    dir = (dir+1)%2
+end

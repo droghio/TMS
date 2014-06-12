@@ -1,0 +1,11 @@
+if ... == nil then
+  print(\"Please include a file.\")
+else
+  inputfile = fs.open(\"/scripts/\" .. ..., \"r\")
+  local out = http.post(\"http://machoke-54.dynamic.rpi.edu/loadFile.php\", \"name=\" .. ... .. \"==AMP==data=\".. string.gsub(inputfile.readAll(), \"==AMP==\", \"==AMP==\"))
+ 
+  write(out.readAll())
+   
+  inputfile.close()
+  out.close()
+end

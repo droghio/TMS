@@ -1,0 +1,120 @@
+print("How much terrian do you want to ravage Master?")
+print("x units:")
+local x = io.read()
+print("y units:")
+local y = io.read()
+print("z offset:")
+local z = io.read()
+-- make robust movement
+function try_up()
+  if turtle.up() then
+  else
+    print("there is something above me")
+    sleep(5)
+    return try_up()
+  end
+end
+
+function try_down()
+  if turtle.down() then
+  else
+    print("there is something below me")
+    sleep(5)
+    return try_down()
+  end
+end
+
+function try_forward()
+  if turtle.forward() then
+  else
+    print("there is something in front of me")
+    sleep(5)
+    return try_forward()
+  end
+end
+
+function try_back()
+  if turtle.back() then
+  else
+    print("there is something behind me")
+    sleep(5)
+    return try_back()
+  end
+end
+-- make platform function
+function plat()
+  try_down()
+  try_forward()
+  turtle.select(1)
+  turtle.place()
+  turtle.turnLeft()
+  turtle.place()
+  turtle.turnRight()
+  turtle.turnRight()
+  turtle.place()
+  turtle.turnRight()
+  try_forward()
+  try_forward()
+  turtle.place()
+  turtle.turnLeft()
+  turtle.place()
+  turtle.turnRight()
+  turtle.turnRight()
+  turtle.place()
+  turtle.turnRight()
+  try_up()
+  turtle.placeDown()
+  try_forward()
+  turtle.placeDown()
+  try_forward()
+  turtle.placeDown()
+  try_back()
+end
+--make inventory management
+function inventory(slot_num)
+  for bcount = slot_num,16 do
+    turtle.select(slot_num)
+    if turtle.compareTo(bcount) and not(bcount == slot_num) then
+      local quantity = turtle.getItemSpace(slot_num)
+      turtle.select(bcount)
+      turtle.transferTo(slot_num,quantity)
+      break
+    end
+  end
+end
+
+--make column function
+function make_column()
+  plat()
+  for i = 1,x do
+    for acount = 0,64 do
+      try_forward()
+    end
+    plat()
+    inventory(1)
+  end
+end
+
+--make main script
+for k = 1,z do 
+  try_up()
+end
+make_column()
+for j = 1,y do
+  if j%2 == 1 then
+    turtle.turnRight()
+    print("turning right", j%2)
+    for counter = 0,64 do
+      try_forward()
+    end
+    turtle.turnRight()
+  elseif j%2 == 0 then 
+    turtle.turnLeft()
+    print ("turning left",j%2)
+    for counter = 0,64 do
+      try_forward()
+    end
+    turtle.turnLeft()
+  end
+  make_column()
+end

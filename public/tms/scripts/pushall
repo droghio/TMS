@@ -1,0 +1,36 @@
+function recursiveCrawl(path)
+    print("Entering "..path)
+	list = fs.list(path)
+	for _,subpath in ipairs(list) do
+		if fs.exists(path..subpath) then
+
+            if fs.isDir(path..subpath) == true then
+                recursiveCrawl(path..subpath.."/")
+            else
+                if action then
+                    print(subpath)
+		    write("  ")
+		    os.run({}, action, path..subpath)
+                else
+                    print(subpath)
+                end
+            end
+
+		end
+	end
+    print("Exiting "..path)
+end
+
+function main()
+    startpath = values[1] .. "/"
+    action = values[2]
+
+    recursiveCrawl(startpath)
+end
+
+if ... == nil then
+    print "Please include start path and action."
+else
+    values = {...}
+    main()
+end

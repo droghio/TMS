@@ -1,0 +1,32 @@
+--for i = 0,10 do
+	--turtle.turnLeft()
+--end
+
+progress = tonumber(fs.open("progress", "r").readAll())
+
+if progress < 1 then
+	if turtle.forward() then
+		progress = tonumber(progress) + 1
+		file = fs.open("progress", "w")
+		file.write(progress)
+		file.close()
+		print(progress)
+	end
+else
+	placeportal()
+end
+
+function placeportal()
+	turtle.select(1)
+	turtle.place()
+	turtle.down()
+	turtle.place()
+	turtle.back()
+	turtle.select(2)
+	turtle.place()
+end
+
+
+
+
+sleep(2)

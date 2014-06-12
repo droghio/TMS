@@ -1,0 +1,6 @@
+print("Time")
+
+os.run({}, "webpull", "move")
+
+sleep(2)
+--return os.run({}, "getdirective", "")

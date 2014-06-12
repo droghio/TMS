@@ -1,0 +1,21 @@
+while true do
+  local counter = 0
+  turtle.select(1)
+  turtle.suckUp()
+  turtle.select(2)
+  turtle.suckUp()
+  turtle.select(5)
+  turtle.suckUp()
+  turtle.select(6)
+  turtle.suckUp()
+  if (not turtle.craft()) then
+    print "Crafting Error Sleeping"
+    for i = 1, 16 do
+      turtle.select(i)
+      turtle.dropUp()
+      turtle.dropDown()
+    end
+    sleep(60)
+  end
+  turtle.dropDown()
+end

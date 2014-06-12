@@ -1,0 +1,101 @@
+-- x is the length of smallest side
+local x = 16
+local y = 4*x
+--local z = (9*x)-9
+local z = 3
+-- make robust movement
+function try_forward()
+  if turtle.forward() then
+  else
+    sleep(5)
+    print("something in front")
+    return try_forward()
+  end
+end
+function try_up()
+  if turtle.up() then
+  else
+    sleep(5)
+    print("something is above me")
+    return try_up()
+  end
+end
+
+-- place a line of length L and stop above end
+function line(length)
+  for i = 1,length-1 do
+    
+    turtle.select(1)
+    if turtle.digDown() and turtle.getItemCount(1) >= 3 then
+    else
+      inventory(1)
+      turtle.digDown()
+    end
+    try_forward()
+  end
+end
+
+--make inventory management
+function inventory(slot_num)
+  for bcount = slot_num,16 do
+    turtle.select(slot_num)
+    if turtle.compareTo(bcount) and not(bcount == slot_num) then
+      local quantity = turtle.getItemSpace(slot_num)
+      turtle.select(bcount)
+      turtle.transferTo(slot_num,quantity)
+      break
+    elseif bcount == 16 then
+      sleep(5)
+      print("give me more stuff")
+      return inventory(1)
+    end
+  end
+end
+
+-- make flat rectangle
+function flat(x,y)
+  for j = 1,y-1 do
+    line(x)
+    if j%2 == 0 then
+      turtle.turnLeft()
+      try_forward()
+      turtle.turnLeft()
+    else
+      turtle.turnRight()
+      try_forward()
+      turtle.turnRight()
+    end
+  end
+  line(x)
+  turtle.turnRight()
+  for i = 2,y do
+    try_forward()
+  end
+  turtle.turnRight()
+end
+
+-- make loop function
+function loop(x,y)
+  
+  line(x)
+  turtle.turnRight()
+  try_forward()
+  line(y-1)
+  turtle.turnRight()
+  try_forward()
+  line(x-1)
+  turtle.turnRight()
+  try_forward()
+  line(y-2)
+  try_forward()
+  turtle.turnRight()
+end 
+-- main
+    
+--flat(x,y)
+for k = 3,z do
+  loop(x,y)  
+end
+turtle.digDown()
+turtle.down()
+--flat(x,y)      

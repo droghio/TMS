@@ -1,0 +1,7 @@
+\".. inputfile.readAll())
+ 
+  write(out.readAll())
+   
+  inputfile.close()
+  out.close()
+end

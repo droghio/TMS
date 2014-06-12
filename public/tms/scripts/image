@@ -1,0 +1,10 @@
+while true do
+  for i=-60,0 do
+    a = paintutils.loadImage("outtxt")
+    paintutils.drawImage(a, i, i)
+    term.setBackgroundColor(colors.black)
+    sleep(2)
+    term.clear()
+    sleep(.2)
+  end
+end

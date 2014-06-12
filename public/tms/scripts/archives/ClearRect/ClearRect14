@@ -1,0 +1,47 @@
+maxx = 2
+maxy = 2
+maxz = 2
+
+currentx = 1
+currenty = 1
+currentz = 1
+
+dir = 0
+
+while currentz < maxz do
+	while currenty < maxy do
+		while (currentx < maxx) do
+			currentx = currentx + 1
+            --Move in X dir.
+			turtle.dig()
+			turtle.forward()
+		end
+
+		--Move in Y dir.
+		if (dir == 0) then
+			turtle.turnLeft()
+			turtle.dig()
+			turtle.forward()
+			turtle.turnLeft()
+
+        --Move to new column
+		elseif (currenty < maxy) then
+			turtle.turnRight()
+			turtle.dig()
+			turtle.forward()
+			turtle.turnRight()
+		end
+        currenty = currenty + 1
+        dir = (dir+1)%2
+        currentx = 1;
+	end
+
+    --Move in Z dir.
+	turtle.digUp()
+	turtle.up()
+    dir = (dir+1)%2
+	turtle.turnLeft()
+	turtle.turnLeft()
+    currenty = 1;
+    currentz = currentz + 1
+end

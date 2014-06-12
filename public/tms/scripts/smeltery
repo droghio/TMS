@@ -1,0 +1,8 @@
+while true do
+  redstone.setOutput("front", true)
+  redstone.setOutput("top", true)
+  sleep(4)
+  redstone.setOutput("front", false)
+  redstone.setOutput("top", false)
+  sleep(1)
+end

@@ -1,0 +1,7 @@
+local directions = fs.open(..., "r")
+
+directions = fs.read("*line")
+while (directions) do
+  os.run({}, "move", directions);
+  directions = file.readLine()
+end

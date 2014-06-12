@@ -1,0 +1,67 @@
+function attemptfix(error)
+    if (error == "out of fuel") then
+       tryrefuel()
+    elseif (error == "out of needed items") then
+        tryplace()
+    elseif error == "block in the way" then
+        sleep(60)
+    end
+end
+
+function tryplace()
+  while not turtle.placeDown() do
+    print("Attempting place.")
+    sleep(5)
+  end
+end
+
+function tryrefuel()
+    print("Attempting refuel.")
+    while (not turtle.refuel()) do
+        sleep(5)
+    end
+end
+
+function reportError(reason)
+   print("Error: "..reason)
+   attemptfix(reason)
+end
+
+
+function move_in_dir(dir)
+    if dir == "f" then
+        return turtle.forward()
+    elseif dir == "b" then
+        return turtle.back()
+    elseif dir == "l" then
+        return turtle.turnLeft() and turtle.forward() and turtle.turnRight()
+    elseif dir == "r" then
+        return turtle.turnRight() and turtle.forward() and turtle.turnLeft()
+    elseif dir == "u" then
+        return turtle.up()
+    elseif dir == "d" then
+        return turtle.down()
+    else
+        reportError("invalid direction")
+    end
+end
+
+
+function move(dir)
+    local attempts = 0
+    while not move_in_dir(dir) do
+        if turtle.getFuelLevel() == 0 then
+            reportError("out of fuel")
+        elseif turtle.detect() then
+            reportError("block in the way")
+        else
+            reportError("unknown movement error")
+        end
+    end
+
+    while not turtle.placeDown() do
+        reportError("out of needed items")
+    end
+end
+
+move(...)

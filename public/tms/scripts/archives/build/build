@@ -1,0 +1,29 @@
+local args = {...}
+
+for z = 1,args[3] do
+  turtle.up()
+  for y = 1,args[2] do
+    for x = 1,args[1] do
+      --inventory(1)
+      turtle.placeDown()
+      if x ~= 1 and x ~= args[1] then
+        turtle.forward()
+      end
+    end
+    local k =y+z
+    if k%2 == 0 then
+      turtle.turnRight()
+      turtle.forward()
+      turtle.turnRight()
+    elseif k%2 == 1 then
+      turtle.turnLeft()
+      turtle.forward()
+      turtle.turnLeft()
+    end
+  end  
+   
+end
+
+function inventory(slot_num)
+  print("inventory called")
+end

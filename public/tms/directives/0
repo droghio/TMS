@@ -1,0 +1,4 @@
+print("Time")
+sleep(2)
+print("to feed.")
+os.run("getdirective")

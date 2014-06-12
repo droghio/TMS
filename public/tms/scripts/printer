@@ -1,0 +1,104 @@
+-- prgram to read files and print them
+-- get input
+print("what is the depth")
+local depth = io.read()
+print("what is the height")
+local height = io.read()
+print("which scan turtle is this")
+local i = io.read()
+
+-- open the file
+local file = fs.open("scanLine"..i,"r")
+local string = file.readAll()
+print(string)
+myTable = textutils.unserialize(string)
+print(myTable[2][2])
+file.close()
+
+-- inventory program
+function inventory(slot_num)
+  print(slot_num)
+  for bcount = slot_num,16 do
+    turtle.select(slot_num)
+    if turtle.compareTo(bcount) and (bcount ~= slot_num) then
+      local quantity = turtle.getItemSpace(slot_num)
+      turtle.select(bcount)
+      turtle.transferTo(slot_num,quantity)
+      break
+    end
+  end
+end
+-- calculate how many items we need
+item_num_table = {}
+for count = 1,16 do
+  item_num_table[count] = 0
+end  
+function calc_items(myTable)
+  for l,v in ipairs(myTable) do
+    for v,k in ipairs(v) do
+      print(l,v,k)
+      for count = 1,16 do
+        if k == count then
+          local temp = item_num_table[count]
+          temp = temp + 1
+          item_num_table[count] = temp
+          print(count," ",item_num_table[count])
+          
+        end
+      end
+    end
+  end
+  for acount = 1,4 do
+    print("The quantity needed in slot ",acount,"is: ",item_num_table[acount])
+  end   
+end
+          
+          
+-- make robust movement
+function try_up()
+  if turtle.up() then
+  else
+    print("there is something above me")
+    sleep(5)
+    return try_up()
+  end
+end
+function try_down()
+  if turtle.down() then
+  else
+    print("there is something below me")
+    sleep(5)
+    return try_down()
+  end
+end
+function try_forward()
+  if turtle.forward() then
+  else
+    print("there is something in front of me")
+    sleep(5)
+    return try_forward()
+  end
+end
+-- make main program
+calc_items(myTable)
+sleep(60)
+for j,v in ipairs(myTable) do
+  for v,k in ipairs(v) do
+    try_up()
+    if k == 0 then
+    else
+      turtle.select(k)
+      if turtle.getItemCount(k) < 10 then
+        inventory(k)
+      else
+      end
+      turtle.placeDown()
+    end
+  end   
+  try_forward()
+  for acount = 1,height do
+    try_down()
+  end
+end    
+    
+                  

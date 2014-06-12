@@ -1,0 +1,70 @@
+-- x is the length of smallest side
+local x = 3
+local y = 4*x
+local z = 9*x
+-- place a line of length L and stop above end
+function line(length)
+  for i = 1,length-1 do
+    turtle.select(i)
+    turtle.placeDown()
+    turtle.forward()
+  end
+  turtle.placeDown()
+end
+
+--make inventory management
+function inventory(slot_num)
+  for bcount = slot_num,16 do
+    turtle.select(slot_num)
+    if turtle.compareTo(bcount) and not(bcount == slot_num) then
+      local quantity = turtle.getItemSpace(slot_num)
+      turtle.select(bcount)
+      turtle.transferTo(slot_num,quantity)
+      break
+    end
+  end
+end
+
+-- make flat rectangle
+function flat(x,y)
+  for j = 1,y-1 do
+    line(x)
+    if j%2 == 0 then
+      turtle.turnLeft()
+      turtle.forward()
+      turtle.turnLeft()
+    else
+      turtle.turnRight()
+      turtle.forward()
+      turtle.turnRight()
+    end
+  end
+  line(x)
+  turtle.turnRight()
+  for i = 2,y do
+    turtle.forward()
+  end
+  turtle.turnRight()
+end
+
+-- make loop function
+function loop(x,y)
+  turtle.up()
+  line(x)
+  turtle.turnRight()
+  turtle.forward()
+  line(y-1)
+  turtle.turnRight()
+  turtle.forward()
+  line(x-1)
+  turtle.turnRight()
+  turtle.forward()
+  line(y-2)
+  turtle.forward()
+  turtle.turnRight()
+end 
+-- main
+    
+flat(x,y)
+loop(x,y)  
+      

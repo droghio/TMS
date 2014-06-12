@@ -1,0 +1,7 @@
+print("which scan turtle is this?")
+local x = io.read()
+local out = fs.open("scanLine"..x,"w")
+local afile = http.get("http://jldapps.com/scripts/tower/scanLine"..x)
+out.write(afile.readAll())
+afile.close()
+out.close()

@@ -1,0 +1,9 @@
+if ... == nil then
+  print("Please include a file.")
+else
+  local out = fs.open(..., "w")
+  local filea = http.get("http://128.113.192.63/scripts/".. ...)
+  out.write(filea.readAll())
+  filea.close()
+  out.close()
+end

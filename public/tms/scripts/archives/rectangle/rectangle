@@ -1,0 +1,50 @@
+-- x is the length of smallest side
+local x = 2
+local y = 4*x
+local z = 9*x
+-- place a line of length L and stop above end
+function line(length)
+  for i = 1,length-1 do
+    turtle.select(i)
+    turtle.placeDown()
+    turtle.forward()
+  end
+  turtle.placeDown()
+end
+
+--make inventory program to wait if levels are too low
+function inventory()
+  if turtle.getItemSpace() < 3 then
+    sleep(5)
+    return inventory
+  end
+end
+
+-- make flat rectangle
+function flat(x,y)
+  for j = 1,y-1 do
+    line(x)
+    if j%2 == 0 then
+      turtle.turnLeft()
+      turtle.forward()
+      turtle.turnLeft()
+    else
+      turtle.turnRight()
+      turtle.forward()
+      turtle.turnRight()
+    end
+  end
+  line(x)
+  turtle.turnRight()
+  for i = 2,y do
+    turtle.forward()
+  end
+  turtle.turnRight()
+end
+
+    
+-- main
+    
+flat(x,y)
+  
+      

@@ -1,0 +1,42 @@
+function startscreen()
+	print("Switching")
+
+	for i = 0,3 do
+		pic = paintutils.loadImage("banana1")
+		paintutils.drawImage(pic, 2, 2)
+		term.setBackgroundColor(colors.white)
+
+		sleep(1)
+		pic = paintutils.loadImage("banana")
+		paintutils.drawImage(pic, 2, 2)
+		term.setBackgroundColor(colors.white)
+		sleep(.2)
+	end
+	
+	sleep(2)
+	--os.run({}, "webpull", "name")
+	os.run({}, "webpull", "sponsor")
+	pic = paintutils.loadImage("sponsor")
+	paintutils.drawImage(pic, 2, 2)
+
+	sleep(1.5)
+	pic = paintutils.loadImage("cola")
+	paintutils.drawImage(pic, 2, 2)
+
+	sleep(2)
+	pic = paintutils.loadImage("star")
+	paintutils.drawImage(pic, 2, 2)
+	sleep(2)
+
+end
+
+function main()
+	monitor = peripheral.wrap("back")
+	term.redirect(monitor)
+	term.clear()
+	startscreen()
+	term.redirect(term.native)
+end
+
+main()
+sleep(2)

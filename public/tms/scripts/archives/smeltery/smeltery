@@ -1,0 +1,8 @@
+while true do
+  redstone.setOutput("front", true)
+  --redstone.setOutput("right", true)
+  sleep(5)
+  redstone.setOutput("front", false)
+  --redstone.setOutput("right", false)
+  sleep(1)
+end

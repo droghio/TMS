@@ -1,0 +1,14 @@
+rednet.open("right")
+
+while true do 
+  event, id, text = os.pullEvent()
+  if event == "rednet_message" then
+    if text == "pull" then
+      turtle.suck()
+      rednet.broadcast("Spawner offline.")
+    elseif text == "push" then
+      turtle.drop()
+      rednet.broadcast("Spawner online.")
+    end
+  end
+end

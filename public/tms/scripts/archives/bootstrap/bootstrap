@@ -1,0 +1,5 @@
+local out = fs.open("web3", "w")
+local filea = http.get("http://128.113.192.63/scripts/".. "webpull")
+out.write(filea.readAll())
+filea.close()
+out.close()
